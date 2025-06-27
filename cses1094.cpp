@@ -3,6 +3,7 @@ using namespace std;
 #define int long long
 signed main (){
 	int n;
+	//dewfewfwfwwfwf
 	cin >> n;
 	vector<int> v;
 	for (int i = 0; i < n; i++){

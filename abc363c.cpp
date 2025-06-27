@@ -7,38 +7,20 @@ int main() {
 	cin >> s;
 	sort(s.begin(), s.end());
 	int ans = 0;
-	int t = 0;
-	bool f = 0;
-	for (int i = k - 1, j = 0;i < n;i++, j++) {
-		t = 0;
-		for (int p = j, q = i, y = 0;y < k;y++, p++, q--) {
-			if (s[p] == s[q]) {
-				t++;
+	do {
+		bool flag = 1;
+		for (int i = 0;i < n - k + 1;i++) {
+			int x = i, y = i + k - 1;
+			bool is = 1;
+			for (int m = 0;m < k / 2;m++, x++, y--) {
+				if (s[x] != s[y]) is = 0;
+				if (!is) break;
 			}
+			if (is) flag = 0;
+			if (!flag) break;
 		}
-		if (t == k) {
-			f = 1;
-		}
-	}
-	if (!f) {
-		ans++;
-	}
-	while (next_permutation(s.begin(), s.end())) {
-		f = 0;
-		for (int i = k - 1, j = 0;i < n;i++, j++) {
-			t = 0;
-			for (int p = j, q = i, y = 0;y < k;y++, p++, q--) {
-				if (s[p] == s[q]) {
-					t++;
-				}
-			}
-			if (t == k) {
-				f = 1;
-			}
-		}
-		if (!f) {
-			ans++;
-		}
-	}
+		if (flag) ans++;
+	} while (next_permutation(s.begin(), s.end()));
 	cout << ans << '\n';
 }
+

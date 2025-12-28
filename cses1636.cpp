@@ -1,20 +1,21 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int dp[105][1000005] = {};
-signed main() {
-	int n, x, mod = 1e9 + 7;
+#define IO ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+const long long INF = numeric_limits<int>::max();
+const long long mod = 1000000007;
+vector<vector<int>> dp;
+int main() {
+	IO;
+	int n, x;
 	cin >> n >> x;
-	vector<int> c(n + 1);
-	for (int i = 1;i <= n;i++) {
-		cin >> c[i];
-	}
+	dp.resize(n + 1, vector<int>(x + 1));
 	dp[0][0] = 1;
 	for (int i = 1;i <= n;i++) {
+		int t;
+		cin >> t;
 		for (int j = 0;j <= x;j++) {
 			dp[i][j] = dp[i - 1][j];
-			if (j >= c[i]) {
-				dp[i][j] = (1ll * dp[i][j] + dp[i][j - c[i]]) % mod;
-			}
+			if (j >= t) dp[i][j] = (dp[i][j] + dp[i][j - t]) % mod;
 		}
 	}
 	cout << dp[n][x];

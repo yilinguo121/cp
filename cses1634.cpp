@@ -1,25 +1,20 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+#define IO ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+const long long INF = 2e9;
 int main() {
-	int n, x;
-	int inf = 1e9;
-	cin >> n >> x;
-	vector<int> v(n + 5), dp(x + 5, inf);
-	for (int i = 0;i < n;i ++) {
-		cin >> v[i];
-	}
+	int n, k;
+	cin >> n >> k;
+	vector<int> v(n);
+	for (auto &x : v) cin >> x;
+	sort(v.begin(), v.end());
+	vector<int> dp(k + 1, INF);
 	dp[0] = 0;
-	for (int i = 1;i <= x;i++) {
-		for (int j = 0;j < n;j++) {
-			if (i >= v[j]) {
-				dp[i] = min(dp[i], dp[i - v[j]] + 1);
-			}
+	for (int i = 1;i <= k;i++) {
+		for (auto x : v) {
+			if (x > i) break;
+			dp[i] = min(dp[i], dp[i - x] + 1);
 		}
 	}
-	if (dp[x] == inf) {
-		cout << -1;
-	}
-	else {
-		cout << dp[x];
-	}
+	cout << (dp[k] == INF ? -1 : dp[k]);
 }

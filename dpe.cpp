@@ -1,26 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main() {
-	int n, t;
-	cin >> n >> t;
-	int sum = 0;
-	int w[101], v[101];
-	for (int i = 1;i <= n;i++) {
-		cin >> w[i] >> v[i];
-		sum += v[i];
-	}
-	vector<long long> dp(sum + 1,1000000000);
+#define IO ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+const long long INF = 1e13;
+#define int long long
+signed main() {
+	int n, m;
+	cin >> n >> m;
+	vector<int> dp(100001, INF);
 	dp[0] = 0;
-	for (int i = 1;i <= n;i++) {
-		for (int j = sum;j >= v[i];j--) {
-			dp[j] = min(dp[j], dp[j - v[i]] + w[i]);
+	while (n--) {
+		int w, v;
+		cin >> w >> v;
+		for (int i = 100000;i >= 1;i--) if (i >= v) dp[i] = min(dp[i], dp[i - v] + w);
+	}
+	for (int i = 100000;i >= 0;i--) {
+		if (dp[i] <= m) {
+			cout << i;
+			return 0;
 		}
 	}
-	int ans = 0;
-	for (int i = 1;i <= sum;i++) {
-		if (dp[i] <= t) ans = i;
-	}
-	cout << ans;
 }
-
 

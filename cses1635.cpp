@@ -1,23 +1,20 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define int long long
-signed main() {
-	int n, x;
-	int mod = 1e9 + 7;
-	cin >> n >> x;
-	int c[n];
-	for (int i = 0;i < n;i++) {
-		cin >> c[i];
-	}
-	vector<int> dp(x + 5);
+#define IO ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+const long long INF = 2e9;
+int main() {
+	int n, k;
+	cin >> n >> k;
+	vector<int> v(n);
+	for (auto &x : v) cin >> x;
+	sort(v.begin(), v.end());
+	vector<int> dp(k + 1, 0);
 	dp[0] = 1;
-	for (int j = 1;j <= x;j++) {
-		for (int i = 0;i < n;i++) {
-			if (j >= c[i]) {
-				dp[j] += dp[j - c[i]];
-				dp[j] = dp[j] % mod;
-			}
+	for (int i = 1;i <= k;i++) {
+		for (auto x : v) {
+			if (x > i) break;
+			dp[i] = (dp[i] + dp[i - x]) % 1000000007;
 		}
 	}
-	cout << dp[x];
+	cout << dp[k];
 }

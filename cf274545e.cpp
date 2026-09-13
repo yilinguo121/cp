@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define IO ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+#define int long long
 const long long INF = numeric_limits<int>::max();
 struct segment_tree {
 	int sz;
@@ -26,7 +27,8 @@ struct segment_tree {
 		return ans;
 	}
 };
-int main() {
+signed main() {
+	IO;
 	int n, q;
 	cin >> n >> q;
 	segment_tree st(n);

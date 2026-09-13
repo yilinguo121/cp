@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define IO ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+#define int long long
 const long long INF = numeric_limits<int>::max();
 struct BIT {
 	int n;
@@ -13,7 +14,8 @@ struct BIT {
 		return s;
 	}
 };
-int main() {
+signed main() {
+	IO
 	int n;
 	cin >> n;
 	vector<pair<int, int>> v(n);
